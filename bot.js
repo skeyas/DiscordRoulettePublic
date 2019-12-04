@@ -98,8 +98,13 @@ client.on('message', msg => {
 		if(oddOrEvenFlag == true)	{
 			if(actual % 2 == 0)	{
 				if(evenFlag == true)	{
-					msg.reply('You win!');
-					msg.reply('Would you like to play again?');
+					if(actual === 38)
+					{msg.reply('You landed on 0, you lose.')}
+					else
+					{
+						msg.reply('You win!');
+						msg.reply('Would you like to play again?');
+					}
 				}
 				else	{
 					msg.reply('You lose.');
@@ -108,8 +113,13 @@ client.on('message', msg => {
 			}
 			else	{
 				if(oddFlag == true)	{
+					if(actual === 37)
+					{msg.reply('You landed on 00, you lose.');}
+					else
+					{
 					msg.reply('You win!');
 					msg.reply('Would you like to play again?');
+					}
 				}
 				else	{
 					msg.reply('You lose.');
