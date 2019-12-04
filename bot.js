@@ -34,40 +34,50 @@ client.on('message', msg => {
 	}
 	if (val === 'Yes')	{
 		msg.reply('What kind of bet would you like to place?');
+		if(val === 'Number')	
+		{
+			numberFlag = true;
+			msg.reply('Enter the number you want to bet on and the amount you wish to bet on it, separated by a space');
+			
+			
+		}
+		else if(val === 'Colour')	
+		{
+			colourFlag = true;
+			msg.reply('Enter the colour upon which you want to bet');
+			if (val === 'Red')	
+			{
+				redFlag = true;
+				msg.reply('How much would you like to bet?');
+			}
+			else if(val === 'Black')	
+			{
+				blackFlag = true;
+				msg.reply('How much would you like to bet?');
+			}
+		}
+		else if(val === 'OE')	
+		{
+			oddOrEvenFlag = true;
+			msg.reply('Would you like to bet on odd or even?');
+			if(val === 'Odd')	
+			{
+				oddFlag = true;
+				msg.reply('How much would you like to bet?');
+			}
+			else if (val === 'Even')	
+			{
+				evenFlag = true;
+				msg.reply('How much would you like to bet?');
+			}
+		}
+		
 	}
 	else if(val === 'No')	{
 		msg.reply('Thank you. Goodbye.');
 	}
-	else if(val === 'Number')	{
-		numberFlag = true;
-		msg.reply('Enter the number you want to bet on and the amount you wish to bet on it, separated by a space');
-		
-	}
-	else if(val === 'Colour')	{
-		colourFlag = true;
-		msg.reply('Enter the colour upon which you want to bet');
-		
-	}
-	else if(val === 'OE')	{
-		oddOrEvenFlag = true;
-		msg.reply('Would you like to bet on odd or even?');
-	}
-	else if(val === 'Odd')	{
-		oddFlag = true;
-		msg.reply('How much would you like to bet?');
-	}
-	else if (val === 'Even')	{
-		evenFlag = true;
-		msg.reply('How much would you like to bet?');
-	}
-	else if (val === 'Red')	{
-		redFlag = true;
-		msg.reply('How much would you like to bet?');
-	}
-	else if(val === 'Black')	{
-		blackFlag = true;
-		msg.reply('How much would you like to bet?');
-	}
+	
+	
 	else if(isNaN(val) == false)	{
 		amount = val;
 		actual = Math.ceil(Math.random()*38);
