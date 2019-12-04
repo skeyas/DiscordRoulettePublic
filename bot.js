@@ -93,6 +93,11 @@ client.on('message', msg => {
 					msg.reply('Would you like to play again?');
 				}
 			}
+			else
+			{
+				msg.reply('The winning color was Green, you lose.')
+				msg.reply('Would you like to play again?');
+			}
 			colourFlag = false;
 		}
 		if(oddOrEvenFlag == true)	{
