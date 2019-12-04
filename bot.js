@@ -76,17 +76,21 @@ client.on('message', msg => {
 			if(blackNumbers.includes(actual))	{
 				if(blackFlag == true)	{
 					msg.reply('You win!');
+					msg.reply('Would you like to play again?');
 				}
 				else	{
 					msg.reply('You lose.');
+					msg.reply('Would you like to play again?');
 				}
 			}
 			if(redNumbers.includes(actual))	{
 				if(redFlag == true)	{
 					msg.reply('You win!');
+					msg.reply('Would you like to play again?');
 				}
 				else	{
 					msg.reply('You lose.');
+					msg.reply('Would you like to play again?');
 				}
 			}
 			colourFlag = false;
@@ -95,17 +99,21 @@ client.on('message', msg => {
 			if(actual % 2 == 0)	{
 				if(evenFlag == true)	{
 					msg.reply('You win!');
+					msg.reply('Would you like to play again?');
 				}
 				else	{
 					msg.reply('You lose.');
+					msg.reply('Would you like to play again?');
 				}
 			}
 			else	{
 				if(oddFlag == true)	{
 					msg.reply('You win!');
+					msg.reply('Would you like to play again?');
 				}
 				else	{
 					msg.reply('You lose.');
+					msg.reply('Would you like to play again?');
 				}
 			}
 			oddOrEvenFlag = false;
@@ -120,9 +128,11 @@ client.on('message', msg => {
 		msg.reply('You landed on ' + actual);
 		if(bet == actual)	{
 			msg.reply('You win!');
+			msg.reply('Would you like to play again?');
 		}
 		else	{
 			msg.reply('You lose.');
+			msg.reply('Would you like to play again?');
 		}
 		numberFlag = false;
 	}
