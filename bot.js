@@ -93,7 +93,7 @@ client.on('message', msg => {
 					msg.reply('Would you like to play again?');
 				}
 			}
-			else
+			else if((actual === 37)||(actual === 38))
 			{
 				msg.reply('The winning color was Green, you lose.')
 				msg.reply('Would you like to play again?');
