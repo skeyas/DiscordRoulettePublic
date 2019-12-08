@@ -23,6 +23,7 @@ var redNumbers = [1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34,
 var bet;
 var amount;
 var actual;
+var total = 300;
 
 client.on('message', msg => {
 	if(msg.author.id === client.user.id)	{
@@ -36,6 +37,18 @@ client.on('message', msg => {
 		msg.reply('What kind of bet would you like to place?');
 	}
 	else if(val === 'No')	{
+		oddOrEvenFlag = false;
+		numberFlag = false;
+		colourFlag = false;
+		redFlag = false;
+		blackFlag = false;
+		oddFlag = false;
+		evenFlag = false;
+		receivedInput = false;
+		bet = null;
+		amount = null;
+		actual = null;
+		total = 300;
 		msg.reply('Thank you. Goodbye.');
 	}
 	else if(val === 'Number')	{
@@ -69,60 +82,81 @@ client.on('message', msg => {
 		msg.reply('How much would you like to bet?');
 	}
 	else if(isNaN(val) == false)	{
-		amount = val;
+		if(val > total)	{
+			msg.reply('You have ' + total + ' dollars. You cannot bet ' + val + ' dollars.');
+			return;
+		}
+		else	{
+			amount = val;
+		}
 		actual = Math.ceil(Math.random()*38);
-		msg.reply('You landed on ' + actual);
+		if(actual < 37)	{
+			msg.reply('You landed on ' + actual);
+		}
+		else if(actual == 37)	{
+			msg.reply('You landed on 0');
+		}
+		else if(actual == 38)	{
+			msg.reply('You landed on 00');
+		}
 		if(colourFlag == true)	{
 			if(blackNumbers.includes(actual))	{
 				if(blackFlag == true)	{
-					msg.reply('You win!');
+					total = total + parseInt(amount);
+					msg.reply('You win! You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 				else	{
-					msg.reply('You lose.');
+					total = total - parseInt(amount);
+					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 			}
-			if(redNumbers.includes(actual))	{
+			else if(redNumbers.includes(actual))	{
 				if(redFlag == true)	{
-					msg.reply('You win!');
+					total = total + parseInt(amount);
+					msg.reply('You win! You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 				else	{
-					msg.reply('You lose.');
+					total = total - parseInt(amount);
+					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
+			}
+			else	{
+				total = total - parseInt(amount);
+				msg.reply('You lose. You now have ' + total + ' dollars.');
+				msg.reply('Would you like to play again?');
 			}
 			colourFlag = false;
 		}
 		if(oddOrEvenFlag == true)	{
-			if(actual % 2 == 0)	{
+			if(actual == 37 || actual == 38)	{
+				total = total + parseInt(amount);
+				msg.reply('You lose. You now have ' + total + ' dollars.');
+			}
+			else if(actual % 2 == 0)	{
 				if(evenFlag == true)	{
-					if(actual === 38)
-					{msg.reply('You landed on 0, you lose.')}
-					else
-					{
-						msg.reply('You win!');
-						msg.reply('Would you like to play again?');
-					}
+					total = total + parseInt(amount);
+					msg.reply('You win! You now have ' + total + ' dollars.');
+					msg.reply('Would you like to play again?');
 				}
 				else	{
-					msg.reply('You lose.');
+					total = total + parseInt(amount);
+					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 			}
 			else	{
 				if(oddFlag == true)	{
-					if(actual === 37)
-					{msg.reply('You landed on 00, you lose.');}
-					else
-					{
-					msg.reply('You win!');
+					total = total + parseInt(amount);
+					msg.reply('You win! You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
-					}
 				}
 				else	{
-					msg.reply('You lose.');
+					total = total + parseInt(amount);
+					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 			}
@@ -133,16 +167,30 @@ client.on('message', msg => {
 	else if(numberFlag == true) {
 		ans = val.split(" ");
 		bet = ans[0];
-		amount = ans[1];
+		if(parseInt(ans[1]) > total)	{
+			msg.reply('You have ' + total + ' dollars. You cannot bet ' + ans[1] + ' dollars.');
+			return;
+		}
+		else	{
+			amount = ans[1];
+		}
+		if(ans[0] == '0')	{
+			bet = 37;
+		}
+		if(ans[0] == '00')	{
+			bet = 38;
+		}
 		actual = Math.ceil(Math.random()*38);
 		msg.reply('You landed on ' + actual);
 		if(bet == actual)	{
-			msg.reply('You win!');
+			total = total + 35*parseInt(amount);
+			msg.reply('You win! You now have ' + total + ' dollars.');
 			msg.reply('Would you like to play again?');
 		}
 		else	{
 			msg.reply('You lose.');
-			msg.reply('Would you like to play again?');
+			total = total - parseInt(amount);
+			msg.reply('Would you like to play again? You now have ' + total + ' dollars.');
 		}
 		numberFlag = false;
 	}
