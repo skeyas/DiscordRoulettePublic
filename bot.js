@@ -31,10 +31,11 @@ client.on('message', msg => {
 	}
 	var val = msg.content;
 	if (val === 'Roulette') {
-		msg.reply('Welcome to Roulette. Would you like to play?');
+		msg.reply('Welcome to Roulette. Would you like to play? (Yes/No)');
 	}
 	if (val === 'Yes')	{
 		msg.reply('What kind of bet would you like to place?');
+		msg.reply('OE (odd or even), Colour, or Number');
 	}
 	else if(val === 'No')	{
 		oddOrEvenFlag = false;
@@ -169,6 +170,7 @@ client.on('message', msg => {
 		bet = ans[0];
 		if(parseInt(ans[1]) > total)	{
 			msg.reply('You have ' + total + ' dollars. You cannot bet ' + ans[1] + ' dollars.');
+			msg.reply('How much would you like to bet?');
 			return;
 		}
 		else	{
