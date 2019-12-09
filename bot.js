@@ -167,7 +167,17 @@ client.on('message', msg => {
 	
 	else if(numberFlag == true) {
 		ans = val.split(" ");
-		bet = ans[0];
+		if(parseInt(ans[0]) >=0 && parseInt(ans[0]) <= 36)	{
+			bet = ans[0];
+		}
+		else if(ans[0] == '00')	{
+			bet = 38;
+		}
+		else	{
+			msg.reply('You must enter either 00 or a number between 0 and 36.');
+			msg.reply('Enter the number on which you want to bet.');
+			return;
+		}
 		if(parseInt(ans[1]) > total)	{
 			msg.reply('You have ' + total + ' dollars. You cannot bet ' + ans[1] + ' dollars.');
 			msg.reply('How much would you like to bet?');
@@ -175,12 +185,6 @@ client.on('message', msg => {
 		}
 		else	{
 			amount = ans[1];
-		}
-		if(ans[0] == '0')	{
-			bet = 37;
-		}
-		if(ans[0] == '00')	{
-			bet = 38;
 		}
 		actual = Math.ceil(Math.random()*38);
 		msg.reply('You landed on ' + actual);
