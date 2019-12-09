@@ -143,19 +143,19 @@ client.on('message', msg => {
 					msg.reply('Would you like to play again?');
 				}
 				else	{
-					total = total + parseInt(amount);
+					total = total - parseInt(amount);
 					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 			}
-			else	{
+			else if(actual % 2 == 1)	{
 				if(oddFlag == true)	{
 					total = total + parseInt(amount);
 					msg.reply('You win! You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
 				else	{
-					total = total + parseInt(amount);
+					total = total - parseInt(amount);
 					msg.reply('You lose. You now have ' + total + ' dollars.');
 					msg.reply('Would you like to play again?');
 				}
